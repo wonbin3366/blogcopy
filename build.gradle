@@ -19,6 +19,8 @@ repositories {
 }
  
 dependencies {
+	implementation 'org.jsoup:jsoup:1.15.3'
+	testImplementation group: 'org.mybatis.spring.boot', name: 'mybatis-spring-boot-starter-test', version: '2.2.2'
 	implementation 'javax.servlet:jstl'
 	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
