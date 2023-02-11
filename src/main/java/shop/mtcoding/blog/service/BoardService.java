@@ -56,8 +56,10 @@ public class BoardService {
         if (boardPS.getUserId() != principalId) {
             throw new CustomApiException("게시글을 수정할 권한이 없습니다", HttpStatus.FORBIDDEN);
         }
+        String thumbnail = HtmlParser.getThumbnail(boardUpdateReqDto.getContent());
 
-        int result = boardRepository.updateById(id, boardUpdateReqDto.getTitle(), boardUpdateReqDto.getContent());
+        int result = boardRepository.updateById(id, boardUpdateReqDto.getTitle(), boardUpdateReqDto.getContent(),
+                thumbnail);
         if (result != 1) {
             throw new CustomApiException("게시글 수정에 실패하엿습니다", HttpStatus.INTERNAL_SERVER_ERROR);
         }
