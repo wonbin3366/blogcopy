@@ -22,12 +22,14 @@ import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import shop.mtcoding.blog.dto.board.BoardResp;
 import shop.mtcoding.blog.model.User;
 
+@Transactional // 메서드 실행직후 롤백! //auto_increment초기화
 @AutoConfigureMockMvc
 @SpringBootTest(webEnvironment = WebEnvironment.MOCK)
 public class BoardControllerTest {
@@ -42,6 +44,7 @@ public class BoardControllerTest {
 
     @BeforeEach // Test 메서드 실행 직전 마다에 호출됨
     public void setUp() {
+        // 세션주입
         User user = new User();
         user.setId(1);
         user.setUsername("ssar");
@@ -69,6 +72,8 @@ public class BoardControllerTest {
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED_VALUE)
                         .session(mockSession));
 
+        System.out.println("save_test : ");
+
         // then
         resultActions.andExpect(status().is3xxRedirection());
     }
@@ -83,7 +88,7 @@ public class BoardControllerTest {
         Map<String, Object> map = resultActions.andReturn().getModelAndView().getModel();
         List<BoardResp.BoardMainRespDto> dtos = (List<BoardResp.BoardMainRespDto>) map.get("dtos");
         String model = om.writeValueAsString(dtos);
-        System.out.println("테스트 : " + model);
+        System.out.println("main_test : " + model);
 
         // then
         resultActions.andExpect(status().isOk());
@@ -99,7 +104,7 @@ public class BoardControllerTest {
         // when
         ResultActions resultActions = mvc.perform(delete("/board/" + id).session(mockSession));
         String reponseBody = resultActions.andReturn().getResponse().getContentAsString();
-        System.out.println("테스트 : " + reponseBody);
+        System.out.println("delete_test : " + reponseBody);
 
         /**
          * jsonPath
