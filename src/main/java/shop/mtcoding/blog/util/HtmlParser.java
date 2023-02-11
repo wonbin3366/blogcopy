@@ -12,7 +12,7 @@ public class HtmlParser {
         Elements els = doc.select("img");
 
         if (els.size() == 0) {
-            thumbnail = "/images/dora/png";
+            thumbnail = "/images/profile.jfif";
         } else {
             Element el = els.get(0);
             thumbnail = el.attr("src");

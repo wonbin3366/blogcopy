@@ -14,8 +14,8 @@
                     ${board.content}
                 </textarea>
                 </div>
-            </form>
             <button onclick="updateById(${board.id})" type="button" class="btn btn-primary">글수정완료</button>
+            </form>
 
         </div>
 
