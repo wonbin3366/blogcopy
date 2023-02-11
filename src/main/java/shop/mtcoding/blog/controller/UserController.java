@@ -11,7 +11,6 @@ import shop.mtcoding.blog.dto.user.UserReq.JoinReqDto;
 import shop.mtcoding.blog.dto.user.UserReq.LoginReqDto;
 import shop.mtcoding.blog.handler.ex.CustomException;
 import shop.mtcoding.blog.model.User;
-import shop.mtcoding.blog.model.UserRepository;
 import shop.mtcoding.blog.service.UserService;
 
 @Controller
